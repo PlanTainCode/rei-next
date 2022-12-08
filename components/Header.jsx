@@ -40,13 +40,16 @@ const Header = ({ logo, eco, ing, lab, work }) => {
         }
     }
 
+
+    const [hover, setHover] = React.useState(false)
+
     // 
     return (
         // <header className={scroll > 250 ? 'header scrolled' : 'header'}>
         <header className={classHeader()}>
             <div className="header__container">
                 <div className={toggle ? 'header__logo hidden' : 'header__logo'}>
-                    <a href="/">
+                    <a href="/" onMouseEnter={() => setHover(false)}>
                         <Image 
                             width={logo.data.attributes.width}
                             height={logo.data.attributes.height}
@@ -57,11 +60,11 @@ const Header = ({ logo, eco, ing, lab, work }) => {
                 </div>
                 <div className="header__spisk">
                     <div className="header__spisk--ul">
-                        <li><Link href="/">О нас</Link></li>
+                        <li><Link href="/about" onMouseEnter={() => setHover(false)}>О нас</Link></li>
                         <li>
-                            <Link href="/work" className='trigger'>Услуги и работы</Link>
-                            <div className="submenu">
-                                <div className="submenu__container">
+                            <Link href="/work" onMouseEnter={() => setHover(true)}>Услуги и работы</Link>
+                            <div className={hover ? "submenu hover" : "submenu"}>
+                                <div className="submenu__container" onMouseLeave={() => setHover(false)}>
                                     <div className="submenu__container--col">
                                         <p>Инженерные изыскания:</p>
                                         <ul>
@@ -105,9 +108,9 @@ const Header = ({ logo, eco, ing, lab, work }) => {
                                 </div>
                             </div>
                         </li>
-                        <li><Link href="/">Контакты</Link></li>
+                        <li><Link href="/contacts" onMouseEnter={() => setHover(false)}>Контакты</Link></li>
                     </div>
-                    <button>Оставить заявку</button>
+                    <button onMouseEnter={() => setHover(false)}>Оставить заявку</button>
                 </div>
                 <div className={toggle ? 'header__icon active' : 'header__icon'} onClick={() => setToggle(!toggle)}>
                     <span className='header__icon--f'></span>
@@ -694,10 +697,10 @@ const Header = ({ logo, eco, ing, lab, work }) => {
                 </div>
                 <div className="menu-mob__ul">
                     <li>
-                        <Link href="/">О нас</Link>
+                        <Link href="/about">О нас</Link>
                     </li>
                     <li>
-                        <Link href="/">Контакты</Link>
+                        <Link href="/contacts">Контакты</Link>
                     </li>
                     <li>
                         <Link href="/">Документация</Link>
